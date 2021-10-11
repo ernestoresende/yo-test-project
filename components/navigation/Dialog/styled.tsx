@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
+import { mediaMaxWidth } from '@styles/media';
 
 const OverlayShow = css`
   @keyframes overlay-show {
@@ -38,17 +39,21 @@ export const StyledDialogOverlay = styled(DialogPrimitive.Overlay)`
 export const StyledDialogContent = styled(DialogPrimitive.Content)`
   ${ContentShow};
   background: var(--colors-gray6);
-  border-radius: 12px;
-  box-shadow: var(--shadow1);
+  border-radius: 8px;
+  border: solid 2px var(--colors-blueGray1);
+  padding: var(--spacing-sm);
 
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90vw;
-  max-width: 450px;
+  max-width: 650px;
   max-height: 85vh;
-  padding: var(--spacing-xs);
+
+  ${mediaMaxWidth.phablet`
+    padding: var(--spacing-xxs);
+  `}
 
   @media (prefers-reduced-motion: no-preference) {
     animation: content-show 150ms cubic-bezier(0.16, 1, 0.3, 1);

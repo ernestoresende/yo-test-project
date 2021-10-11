@@ -5,6 +5,7 @@ type CommonProps = {
   fontSize?: string;
   fontWeight?: number;
   textColor?: string;
+  center?: boolean;
   as?: string;
 };
 
@@ -12,13 +13,22 @@ type TextProps = CommonProps & React.ComponentPropsWithRef<'p'>;
 
 export const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
   (
-    { children, textColor = 'blueGray1', fontSize = 'xs', fontWeight = 400, as = 'p', ...props },
+    {
+      children,
+      textColor = 'blueGray1',
+      fontSize = 'xs',
+      fontWeight = 400,
+      as = 'p',
+      center,
+      ...props
+    },
     componentRef
   ) => {
     const styleProps = {
       'data-fontsize': fontSize,
       'data-textcolor': textColor,
       'data-fontweight': fontWeight,
+      'data-center': center,
     };
 
     switch (as) {

@@ -1,7 +1,5 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { MdAddAPhoto } from 'react-icons/md';
-import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import Illustration from '@assets/illustrations/loginIllustration.svg';
 
 import { Button } from '@components/primitives/Button';
@@ -11,6 +9,7 @@ import { Input } from '@components/primitives/Input';
 import { Spacer } from '@components/layout/Spacer';
 import { Box } from '@components/layout/Box';
 import { MicSwitch, CameraSwitch, SettingsSwitch } from '@components/ConfigurationButtons';
+import { UploadProfileImage } from '@components/UploadProfileImage';
 
 const Background = styled.div`
   background: linear-gradient(var(--colors-violet3), var(--colors-yellow3));
@@ -23,7 +22,7 @@ const Background = styled.div`
   align-items: center;
 `;
 const DialogBoxWrapper = styled.div`
-  background-color: #ffffff;
+  background-color: var(--colors-gray6);
   margin: var(--spacing-xxs);
   padding: var(--spacing-sm);
   border: solid 2px var(--colors-blueGray1);
@@ -38,29 +37,7 @@ const DialogBoxWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const AvatarWrapper = styled.button`
-  cursor: pointer;
-`;
-const AvatarFallback = styled(AvatarPrimitive.Fallback)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  overflow: hidden;
-  user-select: none;
-  width: var(--spacing-xxxl);
-  height: var(--spacing-xxxl);
-  border-radius: 100%;
-  background-color: var(--colors-blueGray6);
-
-  svg {
-    color: var(--colors-blueGray1);
-    height: var(--spacing-sm);
-    width: var(--spacing-sm);
-  }
-`;
 const FormWrapper = styled.div`
-  padding: 0 var(--spacing-xl);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -69,7 +46,6 @@ const FormWrapper = styled.div`
 `;
 const IllustrationWrapper = styled.div`
   width: 100%;
-
   svg {
     width: 100%;
     height: auto;
@@ -77,10 +53,6 @@ const IllustrationWrapper = styled.div`
 `;
 
 const ConferenceLoginPage = () => {
-  function onSettingsPress() {
-    console.log('heyyyyyy');
-  }
-
   return (
     <>
       <Background>
@@ -91,13 +63,7 @@ const ConferenceLoginPage = () => {
               Digite seu nome para entrar na aula
             </Text>
             <Spacer size={32} />
-            <AvatarWrapper>
-              <AvatarPrimitive.Root>
-                <AvatarFallback>
-                  <MdAddAPhoto />
-                </AvatarFallback>
-              </AvatarPrimitive.Root>
-            </AvatarWrapper>
+            <UploadProfileImage />
             <Spacer size={32} />
             <Input name="name" label="Seu nome" isLabelVisible={false} />
             <Spacer size={16} />
@@ -108,9 +74,10 @@ const ConferenceLoginPage = () => {
               <Spacer size={12} />
               <CameraSwitch isActive={false} />
               <Spacer size={12} />
-              <SettingsSwitch onClick={() => onSettingsPress()} />
+              <SettingsSwitch />
             </Box>
           </FormWrapper>
+          <Spacer size={32} />
           <IllustrationWrapper>
             <Illustration />
           </IllustrationWrapper>

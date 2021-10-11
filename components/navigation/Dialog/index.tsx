@@ -1,13 +1,15 @@
 import React from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
-import { IoIosClose } from 'react-icons/io';
+import { DialogContentProps, DialogProps as DefaultDialogProps } from '@radix-ui/react-dialog';
 import * as S from './styled';
 
 type CommonProps = {
   children: React.ReactNode;
 };
 
-export function Dialog({ children, ...props }: CommonProps) {
+type DialogProps = CommonProps & DefaultDialogProps;
+
+export function Dialog({ children, ...props }: DialogProps) {
   return (
     <DialogPrimitive.Root {...props}>
       <S.StyledDialogOverlay />
@@ -16,14 +18,11 @@ export function Dialog({ children, ...props }: CommonProps) {
   );
 }
 
-export const Button = React.forwardRef<HTMLDivElement, CommonProps>(
+export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
   ({ children, ...props }, componentRef) => {
     return (
       <S.StyledDialogContent {...props} ref={componentRef}>
         {children}
-        <DialogPrimitive.Close>
-          <IoIosClose />
-        </DialogPrimitive.Close>
       </S.StyledDialogContent>
     );
   }

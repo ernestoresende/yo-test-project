@@ -5,6 +5,7 @@ type CommonProps = {
   fontSize?: string;
   fontWeight?: number;
   textColor?: string;
+  center?: boolean;
   as?: string;
 };
 
@@ -12,13 +13,22 @@ type HeadingProps = CommonProps & React.ComponentPropsWithRef<'h1'>;
 
 export const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   (
-    { fontSize = 'md', fontWeight = 700, textColor = 'orange1', as = 'h1', children, ...props },
+    {
+      fontSize = 'md',
+      fontWeight = 700,
+      textColor = 'orange1',
+      as = 'h1',
+      center,
+      children,
+      ...props
+    },
     componentRef
   ) => {
     const styleProps = {
       'data-fontsize': fontSize,
       'data-textcolor': textColor,
       'data-fontweight': fontWeight,
+      'data-center': center,
     };
 
     switch (as) {
