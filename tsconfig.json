@@ -6,8 +6,10 @@
       "@components/*": ["components/*"],
       "@routes/*": ["routes/*"],
       "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"],
       "@styles/*": ["styles/*"],
-      "@assets/*": ["assets/*"]
+      "@assets/*": ["assets/*"],
+      "@store/*": ["store/*"]
     },
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
