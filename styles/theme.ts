@@ -16,6 +16,7 @@ const lightThemeColors = {
   blue3: '#5bbeff',
   blue4: '#7fc3ff',
   blue5: '#a3cdff',
+  blue6: '#d9f9f3',
 
   yellow1: '#ffc300',
   yellow2: '#fdd645',

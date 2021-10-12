@@ -88,6 +88,7 @@ const StyledGlobalStyles = createGlobalStyle`
     --colors-blue3: ${(props) => props.theme.colors.blue3};
     --colors-blue4: ${(props) => props.theme.colors.blue4};
     --colors-blue5: ${(props) => props.theme.colors.blue5};
+    --colors-blue6: ${(props) => props.theme.colors.blue6};
 
     --colors-yellow1: ${(props) => props.theme.colors.yellow1};
     --colors-yellow2: ${(props) => props.theme.colors.yellow2};
