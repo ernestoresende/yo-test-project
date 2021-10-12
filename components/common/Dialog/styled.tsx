@@ -51,6 +51,23 @@ export const StyledDialogContent = styled(DialogPrimitive.Content)`
   max-width: 650px;
   max-height: 85vh;
 
+  .close-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--spacing-xxs);
+    width: var(--spacing-xxs);
+    color: var(--colors-orange1);
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    svg {
+      height: var(--spacing-xxs);
+      width: var(--spacing-xxs);
+    }
+  }
+
   ${mediaMaxWidth.phablet`
     padding: var(--spacing-xxs);
   `}
