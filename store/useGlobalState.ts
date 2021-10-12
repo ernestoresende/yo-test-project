@@ -8,6 +8,8 @@ const initialState = {
   roomName: '',
   isAudioMuted: false,
   isVideoShown: true,
+  userMediaPermission: false,
+  userMediaDevices: {},
 };
 
 const useGlobalState = () => {

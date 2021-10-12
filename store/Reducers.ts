@@ -40,6 +40,16 @@ export const reducer = (state, action) => {
         ...state,
         roomName: action.payload,
       };
+    case 'SET_USER_MEDIA_PERMISSION':
+      return {
+        ...state,
+        userMediaPermission: action.payload,
+      };
+    case 'SET_USER_MEDIA_DEVICES':
+      return {
+        ...state,
+        userMediaDevices: action.payload,
+      };
     default:
       return state;
   }
