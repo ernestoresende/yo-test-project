@@ -23,20 +23,20 @@ const Lobby = () => {
   } = useForm();
   const router = useRouter();
 
+  /* Dispatches actions to update the global state with user data */
   async function handleSubmitData(userName: string, displayName: string, roomName: string) {
     globalDispatch({ type: 'SET_USER_NAME', payload: userName });
     globalDispatch({ type: 'SET_DISPLAY_NAME', payload: displayName });
     globalDispatch({ type: 'SET_ROOM_NAME', payload: roomName });
   }
 
+  /* Fired when the user tries to proceed to the ChatRoom and the form values are submited */
   async function onSubmit(data) {
     const userName = encodeURI(data.displayName).toLowerCase();
     const displayName = data.displayName;
-    const roomName = data.roomName;
-
+    const roomName = encodeURI(data.roomName.toLowerCase());
     await handleSubmitData(userName, displayName, roomName);
-
-    console.log('Only log this when all is finished, please!');
+    router.push(`/chatroom/${roomName}`);
   }
 
   const onMicToggle = () => {
@@ -52,6 +52,7 @@ const Lobby = () => {
   };
 
   /* DEBUGGING TABLE */
+  /*
   console.table([
     ['displayName', globalState.displayName],
     ['userName', globalState.userName],
@@ -59,7 +60,8 @@ const Lobby = () => {
     ['roomName', globalState.roomName],
     ['isAudioMuted', globalState.isAudioMuted],
     ['isVideoShown', globalState.isVideoShown],
-  ]);
+  ]); 
+  */
 
   return (
     <>
