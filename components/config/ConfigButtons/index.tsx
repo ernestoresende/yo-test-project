@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ConfigButton } from '@components/primitives/ConfigButton';
+import { ConfigButton } from '@components/common/ConfigButton';
 import { BiCamera, BiCameraOff, BiMicrophone, BiMicrophoneOff } from 'react-icons/bi';
 import { IoSettingsOutline } from 'react-icons/io5';
 

@@ -1,14 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-
-type TitleAndMetaTagsProps = {
-  title?: string;
-  description?: string;
-  image?: string;
-  url?: string;
-  pathname?: string;
-};
+import { TitleAndMetaTagsProps } from './types';
 
 export function TitleAndMetaTags({
   title = 'Yo! Inglês',

@@ -16,6 +16,10 @@ export const ButtonWrapper = styled.button`
     opacity: 0.9;
   }
 
+  &[data-fullwidth] {
+    width: 100%;
+  }
+
   &[data-uppercase] {
     text-transform: uppercase;
   }

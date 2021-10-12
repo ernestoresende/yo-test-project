@@ -1,14 +1,14 @@
 import React from 'react';
 import type { NextPage } from 'next';
 
-import { TitleAndMetaTags } from '@components/seo/Seo';
-import ConferenceLoginPage from '@components/ConferenceLogin';
+import { TitleAndMetaTags } from '@components/Seo';
+import { Lobby } from '@components/containers/Lobby';
 
 const Home: NextPage = () => {
   return (
     <>
       <TitleAndMetaTags title="Yo! Inglês" />
-      <ConferenceLoginPage />
+      <Lobby />
     </>
   );
 };

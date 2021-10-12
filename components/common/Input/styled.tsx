@@ -30,6 +30,10 @@ export const InputWrapper = styled.div`
   border-color: var(--colors-blueGray3);
   min-height: var(--spacing-md);
 
+  &[data-validation-error='true'] {
+    border-color: var(--colors-orange1);
+  }
+
   &[data-focused='true'] {
     box-shadow: var(--shadow2);
     border-color: var(--colors-blueGray2);
@@ -39,7 +43,6 @@ export const InputWrapper = styled.div`
     opacity: 0.8;
   }
 `;
-
 export const InputComponent = styled.input`
   color: var(--colors-blueGray1);
   font-size: var(--fontSize-xs);
@@ -54,4 +57,11 @@ export const InputComponent = styled.input`
   ::placeholder {
     color: var(--colors-blueGray3);
   }
+`;
+export const InputValidationContainer = styled.div`
+  height: var(--spacing-xxxs);
+`;
+export const InputValidationMessage = styled.span`
+  color: var(--colors-orange1);
+  font-size: var(--fontSize-xxs);
 `;

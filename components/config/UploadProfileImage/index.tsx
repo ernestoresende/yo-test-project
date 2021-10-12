@@ -1,71 +1,17 @@
 import * as React from 'react';
-import styled from 'styled-components';
+import * as S from './styled';
 import { useDropzone } from 'react-dropzone';
 import * as ImageConversion from 'image-conversion';
 import Image from 'next/image';
 
 import { MdAddAPhoto } from 'react-icons/md';
 import * as AvatarPrimitive from '@radix-ui/react-avatar';
-import { Dialog, DialogClose, DialogTrigger, DialogContent } from '@components/navigation/Dialog';
+import { Dialog, DialogClose, DialogTrigger, DialogContent } from '@components/common/Dialog';
 import { Box } from '@components/layout/Box';
-import { Button } from '@components/primitives/Button';
-import { Heading } from '@components/primitives/Heading';
-import { Text } from '@components/primitives/Text';
+import { Button } from '@components/common/Button';
+import { Heading } from '@components/common/Heading';
+import { Text } from '@components/common/Text';
 import { Spacer } from '@components/layout/Spacer';
-
-const AvatarWrapper = styled.button`
-  cursor: pointer;
-`;
-const AvatarFallback = styled(AvatarPrimitive.Fallback)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  overflow: hidden;
-  user-select: none;
-  width: var(--spacing-xxxl);
-  height: var(--spacing-xxxl);
-  border-radius: 100%;
-  background-color: var(--colors-gray5);
-
-  svg {
-    color: var(--colors-blueGray1);
-    height: var(--spacing-sm);
-    width: var(--spacing-sm);
-  }
-`;
-const PhotoDragUploadWrapper = styled.div`
-  background: var(--colors-blueGray6);
-  border: dashed 2px var(--colors-blueGray5);
-  border-radius: 10px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
-  min-height: 210px;
-  height: 100%;
-  padding: var(--spacing-xs);
-
-  svg {
-    color: var(--colors-blueGray1);
-    height: var(--spacing-sm);
-    width: var(--spacing-sm);
-  }
-`;
-const ImagePresentWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  .profile-image {
-    height: 200px;
-    width: 200px;
-    border-radius: 9999px;
-  }
-`;
 
 export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
   ({ ...props }, componentRef) => {
@@ -143,7 +89,7 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
     });
 
     /* DEBUGGING TABLE */
-    /* 
+    /*
     console.table([
       ['isLoading', isLoading],
       ['imageFile', imageFile],
@@ -154,14 +100,10 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
 
     return (
       <Dialog onOpenChange={() => setIsDialogOpen(!isDialogOpen)}>
-        <DialogTrigger>
-          <AvatarWrapper ref={componentRef} {...props}>
-            <AvatarPrimitive.Root>
-              <AvatarFallback>
-                <MdAddAPhoto />
-              </AvatarFallback>
-            </AvatarPrimitive.Root>
-          </AvatarWrapper>
+        <DialogTrigger style={{ width: '100%' }}>
+          <Button type="button" backgroundColor="blueGray3" textColor="gray6">
+            Foto de perfil
+          </Button>
         </DialogTrigger>
         <DialogContent>
           <Box flex center direction="column">
@@ -172,11 +114,11 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
             ) : (
               <React.Fragment>
                 {isImagePresent ? (
-                  <ImagePresentWrapper>
+                  <S.ImagePresentWrapper>
                     <Heading center>Foto de perfil atual</Heading>
                     <Spacer size={12} />
                     <Text center>
-                      Essa é foto que outros verão quando você juntar-se a uma sala. Caso queira
+                      Essa é foto que outros verão quando você juntar-se à uma sala. Caso queira
                       mudar a foto, clique em <b>Mudar Foto</b>.
                     </Text>
                     <Spacer size={32} />
@@ -196,12 +138,12 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
                     >
                       Mudar foto
                     </Button>
-                  </ImagePresentWrapper>
+                  </S.ImagePresentWrapper>
                 ) : (
                   <React.Fragment>
                     <Heading center>Escolha uma foto de perfil</Heading>
                     <Spacer size={32} />
-                    <PhotoDragUploadWrapper {...getRootProps()}>
+                    <S.PhotoDragUploadWrapper {...getRootProps()}>
                       <input {...getInputProps()} />
                       {isDragActive ? (
                         <Box flex center direction="column" className="icon-wrapper--active-drag">
@@ -226,7 +168,7 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
                           </Text>
                         </Box>
                       )}
-                    </PhotoDragUploadWrapper>
+                    </S.PhotoDragUploadWrapper>
                     <Spacer size={32} />
                     <DialogClose>
                       <Button backgroundColor="orange1" textColor="orange5">

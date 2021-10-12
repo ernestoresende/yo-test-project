@@ -9,8 +9,8 @@ type CommonProps = {
   isDisabled?: boolean;
   isRequired?: boolean;
   isLabelVisible?: boolean;
-  value?: any;
-  onChange?: (textValue: string) => void;
+  validationError?: boolean;
+  validationMessage?: string;
   children?: React.ReactNode;
 };
 
@@ -23,18 +23,17 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       label,
       placeholder,
       isDisabled = false,
-      isRequired = false,
+      required = false,
       isLabelVisible = true,
+      validationError,
+      validationMessage,
       children,
-      value,
       onBlur,
       onFocus,
-      onChange,
       ...props
     },
     componentRef
   ) => {
-    const [uncontrolledValue, setUncontrolledValue] = React.useState<any>('');
     const [focused, setFocused] = React.useState<boolean>(false);
 
     return (
@@ -48,13 +47,16 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <label htmlFor={name}>{label}</label>
           </VisuallyHidden.Root>
         )}
-        <S.InputWrapper data-disabled={isDisabled} data-focused={focused}>
+        <S.InputWrapper
+          data-validation-error={validationError}
+          data-disabled={isDisabled}
+          data-focused={focused}
+        >
           <S.InputComponent
             {...props}
             name={name}
             aria-label={label}
-            aria-required={isRequired}
-            required={isRequired}
+            aria-required={required}
             placeholder={!isLabelVisible ? label : placeholder}
             disabled={isDisabled}
             onFocus={(e) => {
@@ -69,16 +71,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               }
               setFocused(false);
             }}
-            onChange={(e) => {
-              if (onChange) {
-                onChange(e);
-              }
-              setUncontrolledValue(e.target.value);
-            }}
             ref={componentRef}
-            value={value ? value : uncontrolledValue}
           />
         </S.InputWrapper>
+        <S.InputValidationContainer>
+          {validationMessage ? (
+            <S.InputValidationMessage>{validationMessage}</S.InputValidationMessage>
+          ) : null}
+        </S.InputValidationContainer>
       </S.MainWrapper>
     );
   }

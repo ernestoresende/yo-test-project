@@ -24,6 +24,7 @@ export const ConfigButton = ({
 }: ConfigButtonProps) => {
   return (
     <S.StyledConfigButton
+      type="button"
       name={name}
       buttonSize={buttonSize}
       data-backgroundcolor={backgroundColor}

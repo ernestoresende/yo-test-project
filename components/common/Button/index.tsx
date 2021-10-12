@@ -9,6 +9,7 @@ type CommonProps = {
   isLoading?: boolean;
   isDisabled?: boolean;
   isUpperCase?: boolean;
+  isFullWidth?: boolean;
   leftIcon?: React.ReactNode;
   rightIcon?: React.ReactNode;
 };
@@ -26,6 +27,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       isLoading = false,
       isDisabled = false,
       isUpperCase = true,
+      isFullWidth = true,
       ...props
     },
     componentRef
@@ -36,6 +38,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-backgroundcolor={backgroundColor}
         data-textcolor={textColor}
         data-uppercase={isUpperCase}
+        data-fullwidth={isFullWidth}
         borderRadius={borderRadius}
         ref={componentRef}
         {...props}
