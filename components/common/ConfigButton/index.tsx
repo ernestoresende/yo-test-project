@@ -7,6 +7,7 @@ type CommonProps = {
   icon: React.ReactNode;
   backgroundColor: string;
   iconColor: string;
+  showName?: boolean;
   buttonSize?: number;
   iconSize?: number;
 };
@@ -17,23 +18,27 @@ export const ConfigButton = ({
   name,
   icon,
   backgroundColor,
+  showName = false,
   iconColor,
   buttonSize = 48,
   iconSize = 24,
   ...props
 }: ConfigButtonProps) => {
   return (
-    <S.StyledConfigButton
-      type="button"
-      name={name}
-      buttonSize={buttonSize}
-      data-backgroundcolor={backgroundColor}
-      {...props}
-    >
-      <S.IconWrapper aria-hidden iconSize={iconSize} data-textcolor={iconColor}>
-        {icon}
-      </S.IconWrapper>
-      <VisuallyHidden.Root>{name}</VisuallyHidden.Root>
-    </S.StyledConfigButton>
+    <S.Wrapper buttonSize={buttonSize}>
+      <S.StyledConfigButton
+        type="button"
+        name={name}
+        buttonSize={buttonSize}
+        data-backgroundcolor={backgroundColor}
+        {...props}
+      >
+        <S.IconWrapper aria-hidden iconSize={iconSize} data-textcolor={iconColor}>
+          {icon}
+        </S.IconWrapper>
+        <VisuallyHidden.Root>{name}</VisuallyHidden.Root>
+      </S.StyledConfigButton>
+      {showName ? <S.IconLabel>{name}</S.IconLabel> : null}
+    </S.Wrapper>
   );
 };

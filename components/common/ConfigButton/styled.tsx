@@ -1,6 +1,14 @@
 import { backgroundColors, textColors } from '@styles/mixins';
 import styled from 'styled-components';
 
+export const Wrapper = styled.div`
+  width: ${(props) => `${props.buttonSize}px`};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const StyledConfigButton = styled.button`
   ${backgroundColors};
   width: ${(props) => `${props.buttonSize}px`};
@@ -18,6 +26,12 @@ export const StyledConfigButton = styled.button`
     box-shadow: var(--shadow1);
     opacity: 0.9;
   }
+`;
+
+export const IconLabel = styled.span`
+  font-size: var(--fontSize-xxxs);
+  font-weight: 600;
+  text-align: center;
 `;
 
 export const IconWrapper = styled.div`
