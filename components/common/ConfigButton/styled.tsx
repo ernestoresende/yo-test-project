@@ -2,7 +2,6 @@ import { backgroundColors, textColors } from '@styles/mixins';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  width: ${(props) => `${props.buttonSize}px`};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,6 +28,8 @@ export const StyledConfigButton = styled.button`
 `;
 
 export const IconLabel = styled.span`
+  color: var(--colors-gray6);
+  margin-top: var(--spacing-nano);
   font-size: var(--fontSize-xxxs);
   font-weight: 600;
   text-align: center;

@@ -5,8 +5,8 @@ import * as ImageConversion from 'image-conversion';
 import Image from 'next/image';
 
 import { MdAddAPhoto } from 'react-icons/md';
-import * as AvatarPrimitive from '@radix-ui/react-avatar';
 import { Dialog, DialogClose, DialogTrigger, DialogContent } from '@components/common/Dialog';
+import { Spinner } from '@components/common/Spinner';
 import { Box } from '@components/layout/Box';
 import { Button } from '@components/common/Button';
 import { Heading } from '@components/common/Heading';
@@ -29,14 +29,6 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
         });
         setIsImagePresent(true);
       }
-
-      /* DEBUGGING TABLE */
-      /*
-      console.table([
-        ['Is from useEffect', true],
-        ['localStorageImageData', localStorageImageData],
-      ]);
-      */
     }, [isDialogOpen]);
 
     const onDrop = React.useCallback((acceptedFiles) => {
@@ -88,19 +80,9 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
       onDrop,
     });
 
-    /* DEBUGGING TABLE */
-    /*
-    console.table([
-      ['isLoading', isLoading],
-      ['imageFile', imageFile],
-      ['isImagePresent', isImagePresent],
-      ['isDialogOpen', isDialogOpen],
-    ]); 
-    */
-
     return (
       <Dialog onOpenChange={() => setIsDialogOpen(!isDialogOpen)}>
-        <DialogTrigger style={{ width: '100%' }}>
+        <DialogTrigger asChild style={{ width: '100%' }}>
           <Button type="button" backgroundColor="blueGray3" textColor="gray6">
             Foto de perfil
           </Button>
@@ -109,7 +91,9 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
           <Box flex center direction="column">
             {isLoading ? (
               <React.Fragment>
-                <div>Loading and stuff</div>
+                <Box flex center style={{ height: '210px' }}>
+                  <Spinner size={48} />
+                </Box>
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -170,7 +154,7 @@ export const UploadProfileImage = React.forwardRef<HTMLButtonElement>(
                       )}
                     </S.PhotoDragUploadWrapper>
                     <Spacer size={32} />
-                    <DialogClose>
+                    <DialogClose asChild>
                       <Button backgroundColor="orange1" textColor="orange5">
                         Voltar
                       </Button>

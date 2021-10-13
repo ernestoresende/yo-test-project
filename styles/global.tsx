@@ -39,6 +39,7 @@ const StyledGlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
   button {
+    font-family: Barlow, SF Pro Text, -apple-system, system-ui, BlinkMacSystemFont, Roboto, Helvetica Neue, Segoe UI, Arial, sans-serif;
     background: none;
     border: 0;
     padding: 0;
@@ -61,12 +62,11 @@ const StyledGlobalStyles = createGlobalStyle`
   i, em {
     font-style: italic;
   }
-  input[type="search"] {
-    -webkit-appearance: textfield;
+  input {
+    font-family: Barlow, SF Pro Text, -apple-system, system-ui, BlinkMacSystemFont, Roboto, Helvetica Neue, Segoe UI, Arial, sans-serif;
   }
-  input[type="search"]::-webkit-search-decoration,
-  input[type="search"]::-webkit-search-cancel-button {
-    -webkit-appearance: none;
+  textarea {
+    font-family: Barlow, SF Pro Text, -apple-system, system-ui, BlinkMacSystemFont, Roboto, Helvetica Neue, Segoe UI, Arial, sans-serif;
   }
 
   /* Theme tokens injected as globally available CSS properties */

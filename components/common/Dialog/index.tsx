@@ -25,7 +25,7 @@ export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps
       <S.StyledDialogContent {...props} ref={componentRef}>
         {children}
         <DialogPrimitive.DialogClose asChild>
-          <button className="close-button">
+          <button style={{ cursor: 'pointer' }} className="close-button">
             <IoClose />
           </button>
         </DialogPrimitive.DialogClose>
@@ -33,5 +33,6 @@ export const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps
     );
   }
 );
+
 export const DialogTrigger = DialogPrimitive.Trigger;
 export const DialogClose = DialogPrimitive.Close;
