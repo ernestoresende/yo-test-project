@@ -6,7 +6,6 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
     "format": "prettier --write ."
   },
   "dependencies": {
@@ -17,6 +16,7 @@
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
     "@commitlint/config-conventional": "^13.2.0",
+    "@radix-ui/react-aspect-ratio": "^0.1.0",
     "@radix-ui/react-avatar": "^0.1.0",
     "@radix-ui/react-context-menu": "^0.1.0",
     "@radix-ui/react-dialog": "^0.1.0",
@@ -39,6 +39,7 @@
     "react-dropzone": "^11.4.2",
     "react-hook-form": "^7.17.2",
     "react-icons": "^4.3.1",
+    "reframe.js": "^3.0.3",
     "start-server-and-test": "^1.14.0",
     "styled-components": "^5.3.1",
     "twilio-video": "^2.17.1",
