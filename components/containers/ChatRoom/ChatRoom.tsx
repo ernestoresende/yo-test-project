@@ -16,12 +16,6 @@ const ChatRoom = ({ ...props }) => {
   const [room, setRoom] = React.useState(null);
   const [participants, setParticipants] = React.useState([]);
 
-  console.table([
-    ['ROOM DETAILS', true],
-    ['room', room],
-    ['participants', participants],
-  ]);
-
   React.useEffect(() => {
     const participantConnected = (participant) => {
       setParticipants((prevParticipants) => [...prevParticipants, participant]);

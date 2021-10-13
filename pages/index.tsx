@@ -26,7 +26,6 @@ const Home: NextPage = () => {
         try {
           navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((mediaStream) => {
             if (mediaStream) {
-              console.log('here');
               globalDispatch({ type: 'SET_USER_MEDIA_PERMISSION', payload: true });
               setPermission(true);
             }
