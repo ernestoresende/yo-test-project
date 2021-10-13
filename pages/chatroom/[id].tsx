@@ -10,6 +10,8 @@ const ChatRoomPage: NextPage = () => {
   const { globalState, globalDispatch } = React.useContext(Context);
   const [isLoading, setIsLoading] = React.useState(true);
 
+  /* Retrieves the JWT token from the token server, which will be stored in
+  the global state and used to connect with the room */
   React.useEffect(() => {
     api
       .get(`?identity=${globalState.userName}&room=${globalState.roomName}`)
@@ -18,7 +20,7 @@ const ChatRoomPage: NextPage = () => {
         setIsLoading(false);
       })
       .catch((err) => console.warn(err));
-  }, []);
+  }, [globalDispatch, globalState.userName, globalState.roomName]);
 
   return (
     <>

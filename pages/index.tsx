@@ -48,7 +48,7 @@ const Home: NextPage = () => {
         });
       }
     });
-  }, [permission]);
+  }, [permission, globalDispatch]);
 
   return (
     <>
