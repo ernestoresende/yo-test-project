@@ -1,28 +1,20 @@
 import * as React from 'react';
 import { Context } from '@store/GlobalStateProvider';
 import Video from 'twilio-video';
-// import * as S from './styled';
+import * as S from './styled';
 
 import Participant from '@components/containers/Participant';
 import { Spacer } from '@components/layout/Spacer';
 import { Box } from '@components/layout/Box';
-import { Button } from '@components/common/Button';
-import { MicSwitch, CameraSwitch, SettingsSwitch } from '@components/config/ConfigButtons';
+import { Heading } from '@components/common/Heading';
+import { Spinner } from '@components/common/Spinner';
+import { ConfigFooter } from '@components/config/ConfigFooter';
 
 const ChatRoom = ({ ...props }) => {
-  const { globalState, globalDispatch } = React.useContext(Context);
+  const { globalState } = React.useContext(Context);
   const { roomName, userToken } = globalState;
   const [room, setRoom] = React.useState(null);
   const [participants, setParticipants] = React.useState([]);
-
-  console.table([
-    ['displayName', globalState.displayName],
-    ['userName', globalState.userName],
-    ['userToken', globalState.userToken],
-    ['roomName', globalState.roomName],
-    ['isAudioMuted', globalState.isAudioMuted],
-    ['isVideoShown', globalState.isVideoShown],
-  ]);
 
   console.table([
     ['ROOM DETAILS', true],
@@ -40,8 +32,8 @@ const ChatRoom = ({ ...props }) => {
     };
 
     /* Uses the token and userName from globalState to connect with the Twilio Video Service */
-    Video.connect(globalState.userToken, {
-      name: globalState.roomName,
+    Video.connect(userToken, {
+      name: roomName,
     }).then((room) => {
       setRoom(room);
       room.on('participantConnected', participantConnected);
@@ -67,31 +59,47 @@ const ChatRoom = ({ ...props }) => {
   }, [roomName, userToken]);
 
   const remoteParticipants = participants.map((participant) => (
-    <Participant key={participant.sid} participant={participant} />
+    <Participant key={participant.sid} participant={participant} _videoClass="video-participant" />
   ));
 
-  /* DEBUGGING TABLE */
-  console.table([
-    ['displayName', globalState.displayName],
-    ['userName', globalState.userName],
-    ['userToken', globalState.userToken],
-    ['roomName', globalState.roomName],
-    ['isAudioMuted', globalState.isAudioMuted],
-    ['isVideoShown', globalState.isVideoShown],
-  ]);
-
   return (
-    <div className="room">
-      <div className="local-participant">
-        {room ? (
-          <Participant key={room.localParticipant.sid} participant={room.localParticipant} />
-        ) : (
-          <div>Something is wrong, there are no local participants.</div>
-        )}
-      </div>
-      <h3>Remote Participants</h3>
-      <div className="remote-participants">{remoteParticipants}</div>
-    </div>
+    <React.Fragment>
+      <S.OutterWrapper>
+        <S.MainWrapper>
+          <S.VideoWrapper>
+            <S.RemoteParticipant>
+              {remoteParticipants ? (
+                remoteParticipants
+              ) : (
+                <Box flex center style={{ height: '100%', width: '100%' }}>
+                  <Heading>Aguardando participante</Heading>
+                  <Spacer size={24} />
+                  <Spinner size={24} />
+                </Box>
+              )}
+            </S.RemoteParticipant>
+          </S.VideoWrapper>
+          <S.VideoWrapper>
+            <S.LocalParticipant>
+              {room ? (
+                <Participant
+                  key={room.localParticipant.sid}
+                  participant={room.localParticipant}
+                  _videoClass="video-participant"
+                />
+              ) : (
+                <Box flex center style={{ height: '100%', width: '100%' }}>
+                  <Heading>Aguardando participante local</Heading>
+                  <Spacer size={24} />
+                  <Spinner size={24} />
+                </Box>
+              )}
+            </S.LocalParticipant>
+          </S.VideoWrapper>
+        </S.MainWrapper>
+      </S.OutterWrapper>
+      <ConfigFooter />
+    </React.Fragment>
   );
 };
 

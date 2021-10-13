@@ -33,8 +33,8 @@ const Lobby = () => {
   /* Fired when the user tries to proceed to the ChatRoom and the form values are submited */
   async function onSubmit(data) {
     const userName = encodeURI(data.displayName).toLowerCase();
-    const displayName = data.displayName;
     const roomName = encodeURI(data.roomName.toLowerCase());
+    const displayName = data.displayName;
     await handleSubmitData(userName, displayName, roomName);
     router.push(`/chatroom/${roomName}`);
   }
@@ -50,18 +50,6 @@ const Lobby = () => {
       ? globalDispatch({ type: 'TURN_VIDEO_OFF' })
       : globalDispatch({ type: 'TURN_VIDEO_ON' });
   };
-
-  /* DEBUGGING TABLE */
-  /*
-  console.table([
-    ['displayName', globalState.displayName],
-    ['userName', globalState.userName],
-    ['userToken', globalState.userToken],
-    ['roomName', globalState.roomName],
-    ['isAudioMuted', globalState.isAudioMuted],
-    ['isVideoShown', globalState.isVideoShown],
-  ]); 
-  */
 
   return (
     <>

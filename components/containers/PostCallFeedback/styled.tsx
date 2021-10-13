@@ -12,10 +12,10 @@ export const Background = styled.div`
   align-items: center;
 
   ${mediaMaxWidth.tablet`
-    overflow: hidden;
     height: initial;
     padding: var(--spacing-xxs);
     display: block;
+    width: initial;
   `}
 `;
 export const DialogBoxWrapper = styled.div`
@@ -47,7 +47,11 @@ export const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+
+  ${mediaMaxWidth.desktop`
+    padding: 0 var(--spacing-xxxs);
+  `}
 
   ${mediaMaxWidth.phablet`
     padding: 0; 
@@ -56,12 +60,16 @@ export const FormWrapper = styled.form`
 
 export const IllustrationWrapper = styled.div`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   svg {
-    width: 100%;
+    width: 350px;
     height: auto;
+    margin: 0 auto;
 
     ${mediaMaxWidth.phablet`
-      height: 220px;  
+      height: 300px;  
     `}
   }
 `;

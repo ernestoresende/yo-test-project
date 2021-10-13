@@ -1,6 +1,12 @@
 import * as React from 'react';
 
-const Participant = ({ participant }) => {
+type ParticipantProps = {
+  participant: any;
+  _videoClass?: string;
+  _audioClass?: string;
+};
+
+const Participant = ({ participant, _videoClass, _audioClass }: ParticipantProps) => {
   const [videoTracks, setVideoTracks] = React.useState([]);
   const [audioTracks, setAudioTracks] = React.useState([]);
 
@@ -64,9 +70,8 @@ const Participant = ({ participant }) => {
 
   return (
     <div>
-      <h3>{participant.identity}</h3>
-      <video ref={videoRef} autoPlay={true} />
-      <audio ref={audioRef} autoPlay={true} muted={true} />
+      <video ref={videoRef} autoPlay={true} disablePictureInPicture className={_videoClass} />
+      <audio ref={audioRef} autoPlay={true} muted={true} className={_audioClass} />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ConfigButton } from '@components/common/ConfigButton';
 import { BiCamera, BiCameraOff, BiMicrophone, BiMicrophoneOff } from 'react-icons/bi';
-import { IoSettingsOutline } from 'react-icons/io5';
+import { IoSettingsOutline, IoCall } from 'react-icons/io5';
 
 const styleProps = {
   backgroundColor: 'blueGray6',
@@ -36,6 +36,19 @@ const ConfigSwitchButton = ({ ...props }) => {
   );
 };
 
+const ExitCallButton = ({ ...props }) => {
+  return (
+    <ConfigButton
+      name="Sair da chamada"
+      icon={<IoCall />}
+      backgroundColor="orange1"
+      iconColor="gray6"
+      {...props}
+    />
+  );
+};
+
 export const CameraSwitch = CameraSwitchButton;
 export const MicSwitch = MicSwitchButton;
 export const SettingsSwitch = ConfigSwitchButton;
+export const ExitCall = ExitCallButton;
