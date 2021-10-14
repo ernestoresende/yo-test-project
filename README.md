@@ -1,6 +1,6 @@
 # Yo! Tech Test for FrontEnd Talents
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), integrated with Typescript, styled with Styled Components and tested with Cypress.
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), integrated with Typescript and styled with Styled Components.
 
 ## Quickstart
 
@@ -17,7 +17,6 @@ The project aims to organize it's logical parts into distinguishable parts that 
 - `pages` Stores all the high-level components used by Next.js routing system to create the static and dynamic pages.
 - `assets` - Stores non-code assets like illustrations, custom icons and images.
 - `styles` - Stores global definitions for styles, mixins and the project theme objects.
-- `cypress` - Stores configuration files for the Cypress test runner.
 
 # Deep overview
 
@@ -66,7 +65,7 @@ Color tokens are defined on `styles/theme.ts` to demonstrate how the theme can b
 
 ![Visualization of the collor pallete available on the Chrome DevTools](https://res.cloudinary.com/ernestoresende/image/upload/v1633809550/Screen_Shot_2021-10-09_at_16.58.35_n1dtly.png).
 
-With tokens follow a common prefix an pattern, primitive components can be built and styled with different compositions that stick to the theme using a few basic props. Let's take the button for example:
+With tokens that follow a common prefix an pattern, primitive components can be built and styled with different compositions that stick to the theme using a few basic props. Let's take the button for example:
 
 ```jsx
 import * as React from 'react';
@@ -81,4 +80,38 @@ const ButtonExample = () => {
 };
 ```
 
-> NOTE: The project uses theme tokens **as they were defined on the design spec**, and I've deliberately chosen not to interfere. But do keep in mind, some of the color combinations do not have the minimum contrast ratio to be accepted as accessible by [WCAG 2.1 AA criteria](https://www.w3.org/TR/WCAG21/#contrast-minimum). This is an example of a situation where I would normally try to coordinate efforts with the design team in order to define a more accessible collor pallete.
+> NOTE: The project uses theme tokens **as they were defined on the design spec**, and I've deliberately chosen not to interfere with the original ccolor pallete. But do keep in mind, some of the color combinations do not have the minimum contrast ratio to be accepted as accessible by [WCAG 2.1 AA criteria](https://www.w3.org/TR/WCAG21/#contrast-minimum). This is an example of a situation where I would normally try to coordinate efforts with the design team in order to define a more accessible collor pallete.
+
+## Core features
+
+### Login page
+
+The briefing requested a login screen. Since there is no authentication server, I've decided to go with a simulation "session-based" authentication. The user get's access to a room by inputing a unique username, and a room. If a room with that name already exists, it's joined by the second remote user.
+
+The user can upload a profile image, and it's preview get's displayed, but the lack of a authentication server makes so I don't send it anywhere. For the purposes of demonstration, the image is stored as a base64 token in localStorage, that same base64 encoded image ban sent to the server in a production application.
+
+### Conference room
+
+This is where the main challenge resides (and where many of the core features just couldn't be made in time).
+
+The briefing asks for a 1:1 video-chat interface, where the user can see himself and the person he is speaking to, along with a text chat, and a dialog with options for video/audio devices.
+
+The layout given by the briefing is very ambiguous, because it leaves a lot of questions and concerns unanswered:
+
+1. The layout covers strict 1:1 conversations, what happens if there are more people? Or if I'm the only one in the room.
+2. Layout shifts are radically dependent on menu interactions, and this imposes serious technical challenges that will require time to be built and tested. Is this the optimal option here?
+3. Full-screen split of the 1:1 conversation means that we go against the normally expected aspect ratio for cameras and webcams (16/9 in most cases). This can result in a largelly cropped video overrall.
+
+For the sake of simplicity, and because of the lack of other features such as the chat (and, very honestly, largely because of the lack of time on my end), I've made this page look much more simple than the layout given by the briefing, rendering two boxes vertically on desktop, and horizontally on mobile.
+
+On Twilio, the Room is configured with the "Go" room type, for 1:1 conversations only.
+
+This is not the ideal presentation, nor it matches all the features asked by the briefing, but it gives a rough idea of the approach used to interact with Twilio SDK's. There is much more the SDK allows you to do here, and I couldn't even scratch the surface with the rudimentary approach I've achieved here.
+
+### Feedback page
+
+When the call is finished, the user is asked to give feedback on the application. Here, this page is purely presentational, as again, there is no server to where I should send the collected information.
+
+At this point, the user can choose to go back to the lobby room, or send the provided feedback.
+
+---
