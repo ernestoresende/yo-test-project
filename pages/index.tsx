@@ -40,9 +40,15 @@ const Home: NextPage = () => {
         globalDispatch({
           type: 'SET_USER_MEDIA_DEVICES',
           payload: {
-            ...mappedAudioInputs,
-            ...mappedVideoInputs,
-            ...mappedAudioOutputs,
+            videoInputs: {
+              ...mappedVideoInputs,
+            },
+            audioInputs: {
+              ...mappedAudioInputs,
+            },
+            audioOutputs: {
+              ...mappedAudioOutputs,
+            },
           },
         });
       }

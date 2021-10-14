@@ -10,6 +10,9 @@ const initialState = {
   isVideoShown: true,
   userMediaPermission: false,
   userMediaDevices: {},
+  videoInputDevice: '',
+  audioInputDevice: '',
+  audioOutputDevice: '',
 };
 
 const useGlobalState = () => {

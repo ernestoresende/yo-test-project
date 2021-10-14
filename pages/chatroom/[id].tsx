@@ -4,6 +4,8 @@ import type { NextPage } from 'next';
 import { Context } from '@store/GlobalStateProvider';
 import { TitleAndMetaTags } from '@components/Seo';
 import { Chatroom } from '@components/containers/ChatRoom';
+import { Box } from '@components/layout/Box';
+import { Spinner } from '@components/common/Spinner';
 import { api } from '@utils/api';
 
 const ChatRoomPage: NextPage = () => {
@@ -25,7 +27,13 @@ const ChatRoomPage: NextPage = () => {
   return (
     <>
       <TitleAndMetaTags title="Yo! Inglês | Chat de vídeo" />
-      {isLoading ? <div>Loading</div> : <Chatroom />}
+      {isLoading ? (
+        <Box flex center style={{ height: '100vh' }}>
+          <Spinner size={48} />
+        </Box>
+      ) : (
+        <Chatroom />
+      )}
     </>
   );
 };

@@ -50,6 +50,21 @@ export const reducer = (state, action) => {
         ...state,
         userMediaDevices: action.payload,
       };
+    case 'SET_VIDEO_INPUT_DEVICE':
+      return {
+        ...state,
+        videoInputDevice: action.payload,
+      };
+    case 'SET_AUDIO_INPUT_DEVICE':
+      return {
+        ...state,
+        audioInputDevice: action.payload,
+      };
+    case 'SET_AUDIO_OUTPUT_DEVICE':
+      return {
+        ...state,
+        videoOutputDevice: action.payload,
+      };
     default:
       return state;
   }

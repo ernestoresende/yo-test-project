@@ -14,6 +14,7 @@ export const Background = styled.div`
   ${mediaMaxWidth.tablet`
     overflow: hidden;
     height: initial;
+    width: initial;
     padding: var(--spacing-xxs);
     display: block;
   `}

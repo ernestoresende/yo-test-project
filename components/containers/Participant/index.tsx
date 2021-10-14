@@ -48,6 +48,9 @@ const Participant = ({ participant, _videoClass, _audioClass }: ParticipantProps
     };
   }, [participant]);
 
+  console.log(videoTracks);
+  console.log(audioTracks);
+
   React.useEffect(() => {
     const videoTrack = videoTracks[0];
     if (videoTrack) {
@@ -69,10 +72,10 @@ const Participant = ({ participant, _videoClass, _audioClass }: ParticipantProps
   }, [audioTracks]);
 
   return (
-    <div>
+    <React.Fragment>
       <video ref={videoRef} autoPlay={true} disablePictureInPicture className={_videoClass} />
       <audio ref={audioRef} autoPlay={true} muted={true} className={_audioClass} />
-    </div>
+    </React.Fragment>
   );
 };
 

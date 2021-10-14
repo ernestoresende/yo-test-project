@@ -4,12 +4,8 @@ import { useRouter } from 'next/router';
 
 import { Context } from '@store/GlobalStateProvider';
 import { Spacer } from '@components/layout/Spacer';
-import {
-  MicSwitch,
-  CameraSwitch,
-  SettingsSwitch,
-  ExitCall,
-} from '@components/config/ConfigButtons';
+import { MicSwitch, CameraSwitch, ExitCall } from '@components/config/ConfigButtons';
+import { ConfigDialog } from '@components/config/ConfigDialog';
 
 export const ConfigFooter = () => {
   const router = useRouter();
@@ -48,7 +44,7 @@ export const ConfigFooter = () => {
           isActive={!globalState.isVideoShown}
         />
         <Spacer size={24} />
-        <SettingsSwitch backgroundColor="blue6" />
+        <ConfigDialog />
         <Spacer size={24} />
         <ExitCall onClick={() => onLeaveCall()} />
       </S.ConfigWrapper>

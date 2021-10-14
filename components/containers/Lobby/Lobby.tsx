@@ -11,7 +11,8 @@ import { Text } from '@components/common/Text';
 import { Input } from '@components/common/Input';
 import { Spacer } from '@components/layout/Spacer';
 import { Box } from '@components/layout/Box';
-import { MicSwitch, CameraSwitch, SettingsSwitch } from '@components/config/ConfigButtons';
+import { MicSwitch, CameraSwitch } from '@components/config/ConfigButtons';
+import { ConfigDialog } from '@components/config/ConfigDialog';
 import { UploadProfileImage } from '@components/config/UploadProfileImage';
 
 const Lobby = () => {
@@ -90,7 +91,7 @@ const Lobby = () => {
               <Spacer size={12} />
               <CameraSwitch onClick={() => onVideoToggle()} isActive={!globalState.isVideoShown} />
               <Spacer size={12} />
-              <SettingsSwitch />
+              <ConfigDialog />
             </Box>
           </S.FormWrapper>
           <Spacer size={32} />
