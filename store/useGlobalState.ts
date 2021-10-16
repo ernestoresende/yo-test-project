@@ -9,7 +9,7 @@ const initialState = {
   isAudioMuted: false,
   isVideoShown: true,
   userMediaPermission: false,
-  userMediaDevices: {},
+  userMediaDevices: false,
   videoInputDevice: '',
   audioInputDevice: '',
   audioOutputDevice: '',
