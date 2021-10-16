@@ -14,6 +14,7 @@ import { Box } from '@components/layout/Box';
 import { MicSwitch, CameraSwitch } from '@components/config/ConfigButtons';
 import { ConfigDialog } from '@components/config/ConfigDialog';
 import { UploadProfileImage } from '@components/config/UploadProfileImage';
+import { PageBackdrop } from '@components/containers/PageBackdrop';
 
 const Lobby = () => {
   const { globalState, globalDispatch } = React.useContext(Context);
@@ -31,10 +32,14 @@ const Lobby = () => {
     globalDispatch({ type: 'SET_ROOM_NAME', payload: roomName });
   }
 
-  /* Fired when the user tries to proceed to the ChatRoom and the form values are submited */
+  /* Fired when the user tries to proceed to the ChatRoom and the form values are submited.
+    The roomName is a randomly generated string that will be used to create the room 
+  */
   async function onSubmit(data) {
     const userName = encodeURI(data.displayName).toLowerCase();
-    const roomName = encodeURI(data.roomName.toLowerCase());
+    const roomName = globalState.roomName
+      ? globalState.roomName
+      : Math.random().toString(20).substr(2, 10);
     const displayName = data.displayName;
     await handleSubmitData(userName, displayName, roomName);
     router.push(`/chatroom/${roomName}`);
@@ -54,14 +59,20 @@ const Lobby = () => {
 
   return (
     <>
-      <S.Background>
+      <PageBackdrop>
         <S.DialogBoxWrapper>
           <S.FormWrapper onSubmit={handleSubmit(onSubmit)}>
             <Heading as="h1">Participar da aula</Heading>
             <Spacer size={4} />
-            <Text as="p" fontSize="xs" center>
-              Digite seu nome para entrar na aula
-            </Text>
+            {globalState.roomName ? (
+              <Text as="p" fontSize="xs" center>
+                Você foi convidado para uma sala. Digite seu nome e clique em <b>Entrar na Sala</b>
+              </Text>
+            ) : (
+              <Text as="p" fontSize="xs" center>
+                Para criar uma nova sala, digite o seu nome e clique em <b>Criar Nova Sala</b>.
+              </Text>
+            )}
             <Spacer size={32} />
             <Input
               {...register('displayName', { required: true })}
@@ -71,18 +82,10 @@ const Lobby = () => {
               validationError={errors?.displayName?.type === 'required'}
               validationMessage={errors?.displayName?.type === 'required' && 'Insira um nome'}
             />
-            <Input
-              {...register('roomName', { required: true })}
-              name="roomName"
-              label="Código da sala"
-              isLabelVisible={false}
-              validationError={errors?.roomName?.type === 'required'}
-              validationMessage={
-                errors?.roomName?.type === 'required' && 'Insira um código de sala'
-              }
-            />
             <Spacer size={16} />
-            <Button type="submit">Entrar na sala</Button>
+            <Button type="submit">
+              {globalState.roomName ? 'Entrar na sala' : 'Criar Nova Sala'}
+            </Button>
             <Spacer size={16} />
             <UploadProfileImage />
             <Spacer size={36} />
@@ -99,7 +102,7 @@ const Lobby = () => {
             <Illustration />
           </S.IllustrationWrapper>
         </S.DialogBoxWrapper>
-      </S.Background>
+      </PageBackdrop>
     </>
   );
 };

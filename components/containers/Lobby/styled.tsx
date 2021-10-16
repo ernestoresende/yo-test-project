@@ -1,28 +1,10 @@
 import styled from 'styled-components';
 import { mediaMaxWidth } from '@styles/media';
 
-export const Background = styled.div`
-  background: linear-gradient(var(--colors-violet3), var(--colors-yellow3));
-  height: 100vh;
-  width: 100vw;
-  z-index: 0;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  ${mediaMaxWidth.tablet`
-    overflow: hidden;
-    height: initial;
-    width: initial;
-    padding: var(--spacing-xxs);
-    display: block;
-  `}
-`;
 export const DialogBoxWrapper = styled.div`
   background-color: var(--colors-gray6);
-  margin: var(--spacing-xxs);
   padding: var(--spacing-sm);
+  margin: var(--spacing-xxxs);
   border: solid 2px var(--colors-blueGray1);
   border-radius: 8px;
 
@@ -35,7 +17,6 @@ export const DialogBoxWrapper = styled.div`
   align-items: center;
 
   ${mediaMaxWidth.tablet`
-    margin: 0;
     flex-direction: column-reverse;  
     padding: var(--spacing-xxs);
   `}
@@ -61,7 +42,7 @@ export const IllustrationWrapper = styled.div`
     width: 100%;
     height: auto;
 
-    ${mediaMaxWidth.phablet`
+    ${mediaMaxWidth.tablet`
       height: 220px;  
     `}
   }
