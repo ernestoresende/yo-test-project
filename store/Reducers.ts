@@ -63,7 +63,7 @@ export const reducer = (state, action) => {
     case 'SET_AUDIO_OUTPUT_DEVICE':
       return {
         ...state,
-        videoOutputDevice: action.payload,
+        audioOutputDevice: action.payload,
       };
     default:
       return state;
