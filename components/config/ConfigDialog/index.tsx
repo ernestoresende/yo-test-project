@@ -65,10 +65,10 @@ export const ConfigDialog = React.forwardRef<HTMLDivElement>(({ ...props }, comp
   }, [mediaDevices]);
 
   async function submitDeviceIds(data) {
-    const { audioInputDevices, audioOutputDevices, videoInputDevices } = data;
-    await globalDispatch({ type: 'SET_VIDEO_INPUT_DEVICE', payload: videoInputDevices });
-    await globalDispatch({ type: 'SET_AUDIO_INPUT_DEVICE', payload: audioInputDevices });
-    await globalDispatch({ type: 'SET_AUDIO_OUTPUT_DEVICE', payload: audioOutputDevices });
+    const { audioInputDevice, audioOutputDevice, videoInputDevice } = data;
+    await globalDispatch({ type: 'SET_VIDEO_INPUT_DEVICE', payload: videoInputDevice });
+    await globalDispatch({ type: 'SET_AUDIO_INPUT_DEVICE', payload: audioInputDevice });
+    await globalDispatch({ type: 'SET_AUDIO_OUTPUT_DEVICE', payload: audioOutputDevice });
   }
 
   async function onSubmit(data) {
@@ -90,21 +90,21 @@ export const ConfigDialog = React.forwardRef<HTMLDivElement>(({ ...props }, comp
             <Box flex center direction="column">
               <SelectContainer
                 iconComponent={<BiCamera />}
-                selectName="videoInputDevices"
+                selectName="videoInputDevice"
                 mediaDevices={videoInputDevices}
                 register={register}
               />
               <Spacer size={32} />
               <SelectContainer
                 iconComponent={<BiMicrophone />}
-                selectName="audioInputDevices"
+                selectName="audioInputDevice"
                 mediaDevices={audioInputDevices}
                 register={register}
               />
               <Spacer size={32} />
               <SelectContainer
                 iconComponent={<BiSpeaker />}
-                selectName="audioOutputDevices"
+                selectName="audioOutputDevice"
                 mediaDevices={audioOutputDevices}
                 register={register}
               />

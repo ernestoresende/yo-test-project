@@ -32,17 +32,9 @@ export const ConfigFooter = () => {
   return (
     <S.FooterWrapper>
       <S.ConfigWrapper>
-        <MicSwitch
-          backgroundColor="blue6"
-          onClick={() => onMicToggle()}
-          isActive={globalState.isAudioMuted}
-        />
+        <MicSwitch onClick={() => onMicToggle()} isActive={globalState.isAudioMuted} />
         <Spacer size={24} />
-        <CameraSwitch
-          backgroundColor="blue6"
-          onClick={() => onVideoToggle()}
-          isActive={!globalState.isVideoShown}
-        />
+        <CameraSwitch onClick={() => onVideoToggle()} isActive={!globalState.isVideoShown} />
         <Spacer size={24} />
         <ConfigDialog />
         <Spacer size={24} />
