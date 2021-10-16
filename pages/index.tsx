@@ -1,13 +1,17 @@
 import React from 'react';
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 import { Context } from '@store/GlobalStateProvider';
 import { TitleAndMetaTags } from '@components/Seo';
 import { Lobby } from '@components/containers/Lobby';
 
 const Home: NextPage = () => {
-  const { globalDispatch } = React.useContext(Context);
-  const [permission, setPermission] = React.useState(false);
+  const { globalState, globalDispatch } = React.useContext(Context);
+  const { userMediaDevices } = globalState;
+  const [permission, setPermission] = React.useState<boolean>(false);
+
+  const router = useRouter();
 
   React.useEffect(() => {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
@@ -54,6 +58,33 @@ const Home: NextPage = () => {
       }
     });
   }, [permission, globalDispatch]);
+
+  React.useEffect(() => {
+    if (userMediaDevices) {
+      const defaultVideoInput: any[] = Object.values(userMediaDevices.videoInputs);
+      const defaultAudioInput: any[] = Object.values(userMediaDevices.audioInputs);
+      const defaulAudioOutputs: any[] = Object.values(userMediaDevices.audioOutputs);
+
+      globalDispatch({
+        type: 'SET_VIDEO_INPUT_DEVICE',
+        payload: defaultVideoInput[0].deviceId,
+      });
+      globalDispatch({
+        type: 'SET_AUDIO_INPUT_DEVICE',
+        payload: defaultAudioInput[0].deviceId,
+      });
+      globalDispatch({
+        type: 'SET_AUDIO_OUTPUT_DEVICE',
+        payload: defaulAudioOutputs[0].deviceId,
+      });
+    }
+  }, [userMediaDevices]);
+
+  React.useEffect(() => {
+    if (Object.keys(router.query).length > 0 && router.query.invitecode) {
+      globalDispatch({ type: 'SET_ROOM_NAME', payload: router.query.invitecode });
+    }
+  }, [router]);
 
   return (
     <>
