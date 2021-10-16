@@ -1,20 +1,43 @@
 import * as React from 'react';
 import { Context } from '@store/GlobalStateProvider';
 import Video from 'twilio-video';
+import copy from 'copy-to-clipboard';
 import * as S from './styled';
 
 import Participant from '@components/containers/Participant';
 import { Spacer } from '@components/layout/Spacer';
 import { Box } from '@components/layout/Box';
-import { Heading } from '@components/common/Heading';
 import { Spinner } from '@components/common/Spinner';
+import { Button } from '@components/common/Button';
 import { ConfigFooter } from '@components/config/ConfigFooter';
+import { Text } from '@components/common/Text';
+import { useWindowSize } from '@utils/useWindowSize';
+
+import BetaLogo from '@assets/illustrations/betaLogo.svg';
+import InviteIllustration from '@assets/illustrations/inviteFriend.svg';
+
+const VideoTile = ({ children }) => {
+  return (
+    <Box className="col outer-tile-container">
+      <Box className="outer-tile-container">
+        <Box className="inner-tile-container">
+          <Box className="inner-wrapper">{children}</Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
 
 const ChatRoom = ({ ...props }) => {
   const { globalState } = React.useContext(Context);
   const { roomName, userToken } = globalState;
   const [room, setRoom] = React.useState(null);
   const [participants, setParticipants] = React.useState([]);
+  const [hasCopied, setHasCopied] = React.useState(false);
+
+  const windowSize = useWindowSize();
+  const verticalVideoTileWidth = windowSize.width;
+  const horizontalVideoTileWidth = Math.trunc(windowSize.width / 2 - 100);
 
   React.useEffect(() => {
     const participantConnected = (participant) => {
@@ -52,46 +75,74 @@ const ChatRoom = ({ ...props }) => {
     };
   }, [roomName, userToken]);
 
+  React.useEffect(() => {
+    const currentHost = window.location.host;
+    if (hasCopied) copy(`${currentHost}/?invitecode=${roomName}`);
+    setTimeout(() => setHasCopied(false), 1500);
+  }, [hasCopied]);
+
   const remoteParticipants = participants.map((participant) => (
-    <Participant key={participant.sid} participant={participant} _videoClass="video-participant" />
+    <Participant
+      key={participant.sid}
+      participant={participant}
+      isRemoteParticipant={true}
+      _videoClass="video-stream"
+    />
   ));
 
   return (
     <React.Fragment>
-      <S.OutterWrapper>
-        <S.MainWrapper>
-          <S.VideoWrapper>
-            <S.RemoteParticipant>
-              {remoteParticipants ? (
-                remoteParticipants
-              ) : (
-                <Box flex center style={{ height: '100%', width: '100%' }}>
-                  <Heading>Aguardando participante</Heading>
-                  <Spacer size={24} />
-                  <Spinner size={24} />
-                </Box>
-              )}
-            </S.RemoteParticipant>
-          </S.VideoWrapper>
-          <S.VideoWrapper>
-            <S.LocalParticipant>
-              {room ? (
-                <Participant
-                  key={room.localParticipant.sid}
-                  participant={room.localParticipant}
-                  _videoClass="video-participant"
-                />
-              ) : (
-                <Box flex center style={{ height: '100%', width: '100%' }}>
-                  <Heading>Aguardando participante local</Heading>
-                  <Spacer size={24} />
-                  <Spinner size={24} />
-                </Box>
-              )}
-            </S.LocalParticipant>
-          </S.VideoWrapper>
+      <S.PageBackdrop>
+        <S.LogoWrapper>
+          <BetaLogo style={{ width: '60px' }} />
+        </S.LogoWrapper>
+        <S.ChatroomHeader>
+          <Box className="time-container">
+            <Text>13:32</Text>
+          </Box>
+        </S.ChatroomHeader>
+        <S.MainWrapper
+          horizontalVideoTileWidth={horizontalVideoTileWidth}
+          verticalVideoTileWidth={verticalVideoTileWidth}
+        >
+          <VideoTile>
+            {room ? (
+              <Participant
+                key={room.localParticipant.sid}
+                participant={room.localParticipant}
+                _videoClass="video-stream"
+                isRemoteParticipant={false}
+              />
+            ) : (
+              <Box flex center style={{ height: '100vh' }}>
+                <Spinner size={48} />
+              </Box>
+            )}
+          </VideoTile>
+          <Spacer size={12} />
+          <VideoTile>
+            {participants.length === 0 ? (
+              <Box className="video-stream-backdrop">
+                <InviteIllustration style={{ width: '150px' }} />
+                <Spacer size={24} />
+                <Text fontSize="xs" textColor="gray6" fontWeight={600}>
+                  Ainda não tem ninguém aqui. Convide alguém para entrar!
+                </Text>
+                <Spacer size={24} />
+                <Button
+                  onClick={() => setHasCopied(true)}
+                  style={{ width: 'initial' }}
+                  backgroundColor="blueGray3"
+                >
+                  Criar convite
+                </Button>
+              </Box>
+            ) : (
+              remoteParticipants
+            )}
+          </VideoTile>
         </S.MainWrapper>
-      </S.OutterWrapper>
+      </S.PageBackdrop>
       <ConfigFooter />
     </React.Fragment>
   );
