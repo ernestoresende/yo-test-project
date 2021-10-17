@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import { textColors, fontSizes, fontWeights } from '@styles/mixins';
 
 const CommonStyles = css`
+  line-height: 1.4;
   &[data-center] {
     text-align: center;
   }
