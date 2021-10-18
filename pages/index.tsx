@@ -23,9 +23,9 @@ const Home: NextPage = () => {
       /* Checks if none of the media devices are giving back a deviceId. If that's the case, try to get the
       permission from the user and update the permission global state */
       if (
-        !mappedAudioInputs[0].deviceId &&
-        !mappedVideoInputs[0].deviceId &&
-        !mappedAudioOutputs[0].deviceId
+        !mappedAudioInputs[0].deviceId ||
+        !mappedVideoInputs[0].deviceId ||
+        !mappedAudioInputs[0].deviceId
       ) {
         try {
           navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((mediaStream) => {
@@ -63,7 +63,11 @@ const Home: NextPage = () => {
     if (userMediaDevices) {
       const defaultVideoInput: any[] = Object.values(userMediaDevices.videoInputs);
       const defaultAudioInput: any[] = Object.values(userMediaDevices.audioInputs);
-      const defaulAudioOutputs: any[] = Object.values(userMediaDevices.audioOutputs);
+      // const defaultAudioOutputs: any[] = Object.values(userMediaDevices.audioOutputs);
+
+      const defaultAudioOutputs: any = Object.values(userMediaDevices)
+        ? Object.values(userMediaDevices)
+        : false;
 
       globalDispatch({
         type: 'SET_VIDEO_INPUT_DEVICE',
@@ -75,7 +79,7 @@ const Home: NextPage = () => {
       });
       globalDispatch({
         type: 'SET_AUDIO_OUTPUT_DEVICE',
-        payload: defaulAudioOutputs[0].deviceId,
+        payload: defaultAudioOutputs[0].deviceId,
       });
     }
   }, [userMediaDevices]);
@@ -85,6 +89,8 @@ const Home: NextPage = () => {
       globalDispatch({ type: 'SET_ROOM_NAME', payload: router.query.invitecode });
     }
   }, [router]);
+
+  console.log(globalState);
 
   return (
     <>
