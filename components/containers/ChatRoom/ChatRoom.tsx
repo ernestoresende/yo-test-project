@@ -96,11 +96,6 @@ const ChatRoom = ({ ...props }) => {
         <S.LogoWrapper>
           <BetaLogo style={{ width: '60px' }} />
         </S.LogoWrapper>
-        <S.ChatroomHeader>
-          <Box className="time-container">
-            <Text>13:32</Text>
-          </Box>
-        </S.ChatroomHeader>
         <S.MainWrapper
           horizontalVideoTileWidth={horizontalVideoTileWidth}
           verticalVideoTileWidth={verticalVideoTileWidth}
@@ -134,7 +129,7 @@ const ChatRoom = ({ ...props }) => {
                   style={{ width: 'initial' }}
                   backgroundColor="blueGray3"
                 >
-                  Criar convite
+                  Copiar link de convite
                 </Button>
               </Box>
             ) : (
